@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    background-color: #FFF5F7;
+    font-family: 'Quicksand', system-ui, -apple-system, sans-serif;
+    color: #2D1B2D;
+    overflow-x: hidden;
+  }
+}
+
+/* Washi tape stickers */
+.washi-tape {
+  background: linear-gradient(135deg, rgba(255, 182, 193, 0.75) 0%, rgba(255, 218, 225, 0.9) 50%, rgba(255, 182, 193, 0.75) 100%);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(2px);
+}
+
+.washi-tape-mint {
+  background: linear-gradient(135deg, rgba(167, 243, 208, 0.75) 0%, rgba(209, 250, 229, 0.9) 50%, rgba(167, 243, 208, 0.75) 100%);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(2px);
+}
+
+.washi-tape-yellow {
+  background: linear-gradient(135deg, rgba(253, 230, 138, 0.75) 0%, rgba(254, 243, 199, 0.9) 50%, rgba(253, 230, 138, 0.75) 100%);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(2px);
+}
+
+.washi-tape-lavender {
+  background: linear-gradient(135deg, rgba(233, 213, 255, 0.75) 0%, rgba(243, 232, 255, 0.9) 50%, rgba(233, 213, 255, 0.75) 100%);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(2px);
+}
+
+/* Paper card styling */
+.paper-card {
+  background: #FFFDF9;
+  background-image: radial-gradient(rgba(255, 77, 128, 0.04) 1px, transparent 1px);
+  background-size: 16px 16px;
+  border: 1px solid rgba(243, 197, 208, 0.6);
+}
+
+/* Polaroid frame */
+.polaroid-frame {
+  background: #FFFFFF;
+  box-shadow: 0 10px 25px -5px rgba(45, 27, 45, 0.07), 0 4px 10px -2px rgba(255, 77, 128, 0.05);
+  border: 1px solid rgba(252, 231, 236, 0.9);
+}
+
+/* Hide scrollbar while keeping scrollable */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Reduced motion preference support */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
