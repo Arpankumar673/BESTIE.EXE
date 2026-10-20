@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Sparkles, Heart } from 'lucide-react';
 import { Button } from '../components/common/Button';
 import { EnvelopeSvg } from '../components/decorations/EnvelopeSvg';
+import { IntroTopPhotos } from '../components/common/IntroTopPhotos';
 import { CONTENT } from '../data/content';
 
 /**
@@ -48,12 +49,15 @@ export const IntroScreen = ({ onNext }) => {
         </div>
 
         {/* Main Heading */}
-        <h1 className="font-handwriting text-4xl sm:text-5xl font-bold text-scrapbook-plum tracking-tight mb-2 leading-tight">
+        <h1 className="font-handwriting text-3xl sm:text-4xl font-bold text-scrapbook-plum tracking-tight mb-1 leading-tight">
           {intro.heading}
         </h1>
 
+        {/* Tilted Bestie Photos Composition */}
+        <IntroTopPhotos photos={intro.topPhotos} />
+
         {/* Supporting Message */}
-        <p className="text-xs sm:text-sm text-scrapbook-plum-muted font-medium leading-relaxed mb-6 px-1">
+        <p className="text-xs sm:text-sm text-scrapbook-plum-muted font-medium leading-relaxed mb-3 px-1">
           {typeof intro.subheading === 'function' ? intro.subheading(bestieName) : intro.subheading}
         </p>
 
@@ -65,7 +69,7 @@ export const IntroScreen = ({ onNext }) => {
               ? { duration: 0.35 }
               : { duration: 3.5, repeat: Infinity, ease: 'easeInOut' }
           }
-          className="my-3 flex justify-center cursor-pointer select-none"
+          className="my-2 flex justify-center cursor-pointer select-none"
           onClick={handleOpen}
           title="Click to open your surprise!"
         >
@@ -73,7 +77,7 @@ export const IntroScreen = ({ onNext }) => {
         </motion.div>
 
         {/* Envelope Hint */}
-        <p className="text-[11px] font-bold text-rose-400 mb-6 flex items-center justify-center gap-1">
+        <p className="text-[11px] font-bold text-rose-400 mb-4 sm:mb-5 flex items-center justify-center gap-1">
           <Sparkles className="w-3 h-3 text-amber-400 fill-amber-300" />
           <span>{intro.envelopeHint}</span>
         </p>
@@ -89,7 +93,7 @@ export const IntroScreen = ({ onNext }) => {
         </Button>
 
         {/* Secondary Decorative Text */}
-        <p className="mt-4 text-[11px] font-medium text-scrapbook-plum-muted/80 italic">
+        <p className="mt-3 text-[11px] font-medium text-scrapbook-plum-muted/80 italic">
           {intro.footerText}
         </p>
       </motion.div>

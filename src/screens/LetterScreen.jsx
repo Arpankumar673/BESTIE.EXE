@@ -15,12 +15,13 @@ import { CONTENT } from '../data/content';
  * - Unfolding smooth reveal of the heartfelt letter
  * - Working Continue button to proceed to Screen 6
  */
-export const LetterScreen = ({ onNext, onBack }) => {
-  const [isOpen, setIsOpen] = useState(false);
+export const LetterScreen = ({ onNext, onBack, isOpenedInitial = false, onOpen }) => {
+  const [isOpen, setIsOpen] = useState(isOpenedInitial);
   const { letter, bestieName } = CONTENT;
 
   const handleOpenLetter = () => {
     setIsOpen(true);
+    if (onOpen) onOpen();
     try {
       confetti({
         particleCount: 50,

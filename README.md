@@ -40,10 +40,14 @@ senderName: 'Your Bestie 💗', // Replace with your name
 ```
 
 ### 2. Add Your Photographs
-Save your 6 favorite pictures in:
+Save your pictures in:
 📁 **`public/images/`**
 
-With these exact names:
+**Intro Screen Tilted Photos:**
+- `top-photo-1.jpg` — Left tilted Polaroid on the opening card
+- `top-photo-2.jpg` — Right tilted Polaroid on the opening card
+
+**Scrapbook Memories:**
 - `photo-1.jpg` — Memory 1 ("The beginning of our chaos 📸")
 - `photo-2.jpg` — Memory 2 ("Proof that we're actually normal sometimes 😂")
 - `photo-3.jpg` — Memory 3 ("A moment worth keeping ✨")

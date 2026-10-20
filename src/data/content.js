@@ -20,8 +20,8 @@ export const CONTENT = {
   // =====================================================================
   // 1. NAMES & GENERAL DETAILS
   // =====================================================================
-  bestieName: '[BESTIE NAME]', // Replace with your best friend's real name (e.g. 'Sarah', 'Alex')
-  senderName: 'Your Bestie 💗', // Replace with your name or nickname
+  bestieName: 'Butkii', // Replace with your best friend's real name (e.g. 'Sarah', 'Alex')
+  senderName: 'PB 💗', // Replace with your name or nickname
 
   // =====================================================================
   // 2. SCREEN 1: THE SURPRISE INTRODUCTION
@@ -33,6 +33,24 @@ export const CONTENT = {
     envelopeHint: 'Tap the envelope or click below to begin ✨',
     buttonText: 'Open Your Surprise 🎁',
     footerText: 'Made with an unreasonable amount of love ✨',
+    topPhotos: [
+      {
+        id: 'top-photo-1',
+        imagePath: '/images/top-photo-1.jpeg',
+        alt: 'Our favorite memory 1',
+        sticker: '🌸',
+        tapeColor: 'washi-tape',
+        rotation: '-rotate-[8deg]',
+      },
+      {
+        id: 'top-photo-2',
+        imagePath: '/images/top-photo-2.jpeg',
+        alt: 'Our favorite memory 2',
+        sticker: '✨',
+        tapeColor: 'washi-tape-yellow',
+        rotation: 'rotate-[7deg]',
+      },
+    ],
   },
 
   // =====================================================================
@@ -43,16 +61,16 @@ export const CONTENT = {
     heading: 'Hold on a second... 🤨',
     question: 'Are you actually my favorite human?',
     yesButton: 'YES, OBVIOUSLY 💅',
-    noButton: 'NO, WHO ARE YOU? 🤡',
-    yesCelebration: 'CORRECT ANSWER! 🎉 Best decision you have ever made. No refunds or cancellations allowed anyway! 💖',
+    noButton: "NOOO, I'M NOT YOUR BESTIE 😭",
+    yesHeading: 'I KNEW IT! 😭💗',
+    yesCelebration: "Obviously, you're my favourite human, Butki. Now let's see why you're stuck with me! 😂",
     continueButton: 'Continue to Reasons You Rock ✨',
     noResponses: [
-      'Nice try! The button slipped away! 😂',
-      'Error 404: "No" is not a valid option! 🙅‍♀️',
-      'You really thought you could click that? 💀',
-      'Are you sure? Think about all our shared snacks! 🍕',
-      'System warning: Clicking NO violates friendship protocols! 🚨',
-      'Okay fine, you survived... but you are STILL my favorite human! 🥹💗',
+      "Nice try, Butki! 😂",
+      "Excuse me?! After everything we've been through? 😭",
+      "Error 404: Friendship denial rejected! 💗",
+      "Stop pretending, Nikki! We both know the truth. 🫶",
+      "Okay, drama queen. Now press YES! 💅",
     ],
   },
 
