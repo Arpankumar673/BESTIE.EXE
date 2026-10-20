@@ -131,7 +131,7 @@ export const LetterScreen = ({ onNext, onBack, isOpenedInitial = false, onOpen }
                 </h1>
 
                 {/* Greeting */}
-                <p className="font-handwriting text-xl sm:text-2xl font-bold text-rose-600 mb-3">
+                <p className="font-handwriting text-2xl sm:text-3xl font-bold text-rose-600 mb-3 tracking-wide">
                   {typeof letter.greeting === 'function' ? letter.greeting(bestieName) : letter.greeting}
                 </p>
 
@@ -142,27 +142,114 @@ export const LetterScreen = ({ onNext, onBack, isOpenedInitial = false, onOpen }
                       key={idx}
                       initial={{ opacity: 0, y: 6 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.1 * idx, duration: 0.3 }}
+                      transition={{ delay: 0.05 * idx, duration: 0.3 }}
                     >
                       {para}
                     </motion.p>
                   ))}
                 </div>
 
+                {/* Terms & Conditions / Birthday Friendship Rules Mini Card */}
+                {(letter.rules || letter.terms) && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.25, duration: 0.3 }}
+                    className="relative my-4 p-3.5 sm:p-4 rounded-xl bg-gradient-to-br from-pink-50/90 via-[#FFF5F8] to-purple-50/70 border border-pink-200/90 shadow-xs"
+                  >
+                    {/* Cute mini tape accent */}
+                    <div
+                      className="absolute -top-2 right-4 w-14 h-4 washi-tape-mint rounded-xs opacity-90 rotate-[2deg] pointer-events-none"
+                      aria-hidden="true"
+                    />
+
+                    <div className="flex items-center gap-1.5 mb-2.5">
+                      <span className="text-base select-none">👑</span>
+                      <h3 className="font-bold text-xs sm:text-sm text-scrapbook-plum tracking-tight">
+                        {letter.rulesTitle || letter.termsTitle || 'Birthday Friendship Rules 😂'}
+                      </h3>
+                    </div>
+
+                    <ul className="space-y-2">
+                      {(letter.rules || letter.terms).map((item, idx) => (
+                        <li
+                          key={idx}
+                          className="flex items-start gap-2 text-xs sm:text-[13px] text-scrapbook-plum font-medium leading-snug"
+                        >
+                          <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-rose-100 text-rose-600 text-[10px] font-bold mt-0.5 shrink-0 border border-rose-200/80">
+                            ✓
+                          </span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                )}
+
+                {/* Final Paragraph */}
+                {letter.finalParagraph && (
+                  <motion.p
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3, duration: 0.3 }}
+                    className="text-xs sm:text-[13px] text-scrapbook-plum font-medium leading-relaxed my-3"
+                  >
+                    {letter.finalParagraph}
+                  </motion.p>
+                )}
+
+                {/* Prominent Birthday Wish Banner */}
+                {letter.birthdayWish && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.35, duration: 0.35 }}
+                    className="my-3.5 py-3 px-4 rounded-2xl bg-gradient-to-r from-rose-100/90 via-pink-100 to-amber-100/80 border-2 border-pink-200/90 shadow-xs text-center"
+                  >
+                    <p className="font-handwriting text-2xl sm:text-3xl font-extrabold text-rose-600 tracking-wide drop-shadow-xs">
+                      {letter.birthdayWish}
+                    </p>
+                  </motion.div>
+                )}
+
+                {/* Closing */}
+                {letter.closing && (
+                  <motion.p
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4, duration: 0.3 }}
+                    className="text-xs sm:text-[13px] text-scrapbook-plum font-semibold leading-relaxed mt-2"
+                  >
+                    {letter.closing}
+                  </motion.p>
+                )}
+
                 {/* Sign-off & Signature */}
                 <div className="mt-5 pt-3 border-t border-pink-100/90 flex flex-col items-end text-right">
-                  <span className="text-xs text-scrapbook-plum-muted font-medium mb-1">
-                    {letter.signoff}
+                  <span className="text-xs sm:text-sm text-scrapbook-plum-muted font-medium mb-1">
+                    {letter.signatureIntro || letter.signoff}
                   </span>
-                  <span className="font-handwriting text-2xl font-bold text-rose-600">
+                  <span className="font-handwriting text-2xl sm:text-3xl font-bold text-rose-600 tracking-wide">
                     {letter.signature}
                   </span>
                 </div>
+
+                {/* P.S. Note */}
+                {letter.ps && (
+                  <div className="mt-4 pt-3 border-t border-dashed border-pink-200/90">
+                    <div className="bg-pink-50/70 p-3 rounded-xl border border-pink-100/80">
+                      <p className="text-xs sm:text-[13px] text-scrapbook-plum italic font-medium leading-relaxed">
+                        <span className="font-bold text-rose-600 not-italic mr-1.5">P.S.</span>
+                        {letter.ps}
+                      </p>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
             {/* Next Chapter CTA Button */}
-            <div className="w-full space-y-2.5 mt-5 pt-3 border-t border-pink-200/70">
+            <div className="w-full space-y-2.5 mt-5 pt-3 border-t border-pink-200/70 pb-8">
               <Button
                 onClick={onNext}
                 icon={ArrowRight}

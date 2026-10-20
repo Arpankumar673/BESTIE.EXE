@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, ArrowRight, ArrowLeft, Camera } from 'lucide-react';
+import { Sparkles, ArrowRight, ArrowLeft } from 'lucide-react';
 import { Button } from '../components/common/Button';
 import { Polaroid } from '../components/common/Polaroid';
 import { ImageModal } from '../components/common/ImageModal';
@@ -43,7 +43,7 @@ export const ScrapbookScreen = ({ onNext, onBack }) => {
       </motion.div>
 
       {/* Scrapbook Photo Grid (1 column on small phones, 2 columns on sm+) */}
-      <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-4 mb-6">
+      <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-4 mb-5">
         {scrapbook.photos.map((photo, idx) => (
           <motion.div
             key={photo.id}
@@ -65,16 +65,8 @@ export const ScrapbookScreen = ({ onNext, onBack }) => {
         ))}
       </div>
 
-      {/* Helpful Customization Note */}
-      <div className="w-full bg-pink-100/60 rounded-2xl p-3 border border-pink-200/70 text-center mb-6">
-        <p className="text-[11px] font-semibold text-rose-600 flex items-center justify-center gap-1.5">
-          <Camera className="w-3.5 h-3.5 shrink-0" />
-          <span>To add your photos, place files in <code className="bg-white/80 px-1 py-0.5 rounded font-mono">/public/images/</code></span>
-        </p>
-      </div>
-
       {/* Bottom Navigation */}
-      <div className="w-full space-y-2.5 pt-2">
+      <div className="w-full space-y-2.5">
         <Button
           onClick={onNext}
           icon={ArrowRight}
