@@ -109,7 +109,7 @@ export const CONTENT = {
       {
         id: 4,
         title: 'My Forever Bestie 🫶',
-        description: 'No matter how weird things get, you are still my person.',
+        description: 'No matter how weird things get, you are still my favourite person.',
         sticker: '👑',
         tag: 'FOREVER BOND',
         tapeColor: 'washi-tape-lavender',
