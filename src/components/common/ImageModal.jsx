@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Sparkles } from 'lucide-react';
-import { ImageWithFallback } from './ImageWithFallback';
+import { X, Sparkles, Heart } from 'lucide-react';
 
 /**
  * ImageModal Component
  *
- * Fullscreen mobile-friendly lightbox to view any photo in high detail.
- * Closes via 'X' button, backdrop tap, or Escape key.
+ * Fullscreen mobile-friendly lightbox to view any scrapbook photo in high detail.
+ * - Prevents background page scrolling while modal is open
+ * - Restores background scrolling when modal closes
+ * - Closes via 'X' button, backdrop tap, or Escape key
  */
-export const ImageModal = ({ photo, isOpen, onClose, fallbackMessage }) => {
+export const ImageModal = ({ photo, isOpen, onClose }) => {
   useEffect(() => {
     if (!isOpen) return;
 
@@ -17,8 +18,15 @@ export const ImageModal = ({ photo, isOpen, onClose, fallbackMessage }) => {
       if (e.key === 'Escape') onClose();
     };
 
+    // Lock body scroll while modal is active
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, [isOpen, onClose]);
 
   if (!isOpen || !photo) return null;
@@ -26,7 +34,7 @@ export const ImageModal = ({ photo, isOpen, onClose, fallbackMessage }) => {
   return (
     <AnimatePresence>
       <div
-        className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-black/65 backdrop-blur-xs"
+        className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-black/70 backdrop-blur-xs"
         role="dialog"
         aria-modal="true"
         aria-labelledby="image-modal-title"
@@ -37,7 +45,7 @@ export const ImageModal = ({ photo, isOpen, onClose, fallbackMessage }) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="absolute inset-0"
+          className="absolute inset-0 cursor-pointer"
           aria-hidden="true"
         />
 
@@ -61,45 +69,46 @@ export const ImageModal = ({ photo, isOpen, onClose, fallbackMessage }) => {
 
           {/* Modal Header */}
           <div className="w-full flex items-center justify-between mb-3">
-            <span className="inline-flex items-center gap-1 text-[10px] font-bold text-rose-500 uppercase tracking-wider bg-pink-50 px-2.5 py-0.5 rounded-full border border-pink-100">
-              <Sparkles className="w-2.5 h-2.5 text-rose-400" />
+            <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs font-bold text-rose-500 uppercase tracking-wider bg-pink-50 px-3 py-1 rounded-full border border-pink-100 shadow-2xs">
+              <Sparkles className="w-3 h-3 text-rose-400" />
               <span>{photo.tag || 'MEMORY'}</span>
-              <span className="text-scrapbook-plum-muted/60 ml-1">#{photo.id}</span>
+              <span className="text-scrapbook-plum-muted/70 font-mono ml-1">
+                #{String(photo.id).padStart(2, '0')}
+              </span>
             </span>
 
             <button
               type="button"
               onClick={onClose}
-              className="p-1.5 rounded-full bg-white border border-pink-200 text-scrapbook-plum-muted hover:text-rose-500 hover:bg-pink-50 transition-colors shadow-2xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-400"
+              className="p-1.5 rounded-full bg-white border border-pink-200 text-scrapbook-plum-muted hover:text-rose-500 hover:bg-pink-50 transition-colors shadow-2xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-400 cursor-pointer"
               aria-label="Close photo view"
             >
-              <X className="w-4 h-4" />
+              <X className="w-5 h-5" />
             </button>
           </div>
 
           {/* Large Image Frame */}
-          <div className="relative w-full rounded-2xl overflow-hidden border border-pink-100 bg-stone-50 shadow-inner mb-3">
-            <ImageWithFallback
-              src={photo.imagePath}
-              alt={photo.title}
-              slotId={photo.id}
-              fallbackMessage={fallbackMessage}
-              aspectRatio="aspect-[4/3] sm:aspect-[16/10]"
+          <div className="relative w-full rounded-2xl overflow-hidden border border-pink-100/90 bg-stone-50 shadow-inner mb-3">
+            <img
+              src={photo.resolvedUrl || photo.imagePath}
+              alt={photo.caption || photo.title || 'Scrapbook Memory'}
+              className="w-full max-h-[60vh] object-contain rounded-xl mx-auto"
             />
           </div>
 
-          {/* Title & Caption */}
-          <div className="w-full text-left space-y-1.5">
+          {/* Caption */}
+          <div className="w-full text-left space-y-1">
             <h2
               id="image-modal-title"
-              className="font-handwriting text-2xl font-bold text-scrapbook-plum leading-snug"
+              className="font-handwriting text-2xl sm:text-3xl font-bold text-scrapbook-plum leading-snug"
             >
               {photo.caption || photo.title}
             </h2>
 
-            <p className="text-xs text-scrapbook-plum-muted/80 font-medium pt-1">
-              File path: <code className="bg-pink-50 text-rose-600 px-1.5 py-0.5 rounded text-[11px] font-mono">/public{photo.imagePath}</code>
-            </p>
+            <div className="flex items-center gap-1.5 text-xs text-rose-400 font-semibold pt-1">
+              <Heart className="w-3.5 h-3.5 fill-rose-300 text-rose-400 inline" />
+              <span>A moment worth keeping forever 💗</span>
+            </div>
           </div>
         </motion.div>
       </div>
